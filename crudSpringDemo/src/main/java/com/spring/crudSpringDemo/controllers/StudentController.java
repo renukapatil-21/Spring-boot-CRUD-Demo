@@ -27,11 +27,12 @@ public class StudentController {
     }*/
 
     @PostMapping("/create")
-    public String createStudent(@RequestBody Student student){
+    public Student createStudent(@RequestBody Student student){
+
         Student createdStudent =  studentService.createStudent(student);
         System.out.println("controller");
 
-        return "Student created!";
+        return createdStudent;
     }
 
 
