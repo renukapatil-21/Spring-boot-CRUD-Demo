@@ -81,11 +81,21 @@ public class StudentController {
         Boolean isDeleted = studentService.deleteStudent(id);
 
         if(!isDeleted){
-            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(true);
+    }
+
+    @PatchMapping("/delete-soft/{id}")
+    public ResponseEntity<String> deleteStudentSoftly(@PathVariable Long id){
+        Boolean isDeleted = studentService.deleteStudentSoftly(id);
+
+        if(!isDeleted){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok("Student marked as deleted");
     }
 
 }
