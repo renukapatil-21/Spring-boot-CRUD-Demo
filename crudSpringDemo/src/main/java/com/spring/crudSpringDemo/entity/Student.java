@@ -14,7 +14,7 @@ public class Student {
     private int age;
     private String email;
     private int rollNo;
-    private String Subject;
+    private String subject;
 
     public Long getId() {
         return id;
@@ -57,11 +57,10 @@ public class Student {
     }
 
     public String getSubject() {
-        return Subject;
+        return subject;
     }
 
     public void setSubject(String subject) {
-        Subject = subject;
+        this.subject = subject;
     }
-
 }

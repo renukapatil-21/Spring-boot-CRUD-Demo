@@ -1,14 +1,26 @@
 package com.spring.crudSpringDemo.repository;
 
 import com.spring.crudSpringDemo.entity.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class StudentRepository {
+//@Repository
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    public Student saveStudent(Student studentReq) {
+
+
+
+
+
+
+
+
+
+
+
+
+    /*public Student saveStudent(Student studentReq) {
         System.out.println("repository");
-
 
         Student s1 = new Student();
         s1.setName("Renuka");
@@ -18,5 +30,5 @@ public class StudentRepository {
         s1.setSubject("Spring boot");
 
         return s1;
-    }
+    }*/
 }

@@ -2,6 +2,7 @@ package com.spring.crudSpringDemo.controllers;
 
 import com.spring.crudSpringDemo.entity.Student;
 import com.spring.crudSpringDemo.services.StudentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,13 +28,64 @@ public class StudentController {
     }*/
 
     @PostMapping("/create")
-    public Student createStudent(@RequestBody Student student){
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
 
         Student createdStudent =  studentService.createStudent(student);
-        System.out.println("controller");
+        //System.out.println("controller");
 
-        return createdStudent;
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(createdStudent);
     }
 
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable Long id){
+        Student studRes = studentService.getStudent(id);
+
+        if(studRes == null){
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(studRes);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Student>> getAllStudents(){
+        List<Student> studList = studentService.getAllStudents();
+
+        if(studList == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(studList);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id,
+                                                 @RequestBody Student studReq
+    ){
+        Student studRes = studentService.updateStudent(id, studReq);
+
+        if(studRes == null){
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(studRes);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Boolean> deleteStudent(@PathVariable Long id){
+        Boolean isDeleted = studentService.deleteStudent(id);
+
+        if(!isDeleted){
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(true);
+    }
 
 }
